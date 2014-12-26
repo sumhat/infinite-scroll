@@ -1,12 +1,12 @@
 <?php
 
 /*
-Plugin Name: The Neverending Home Page.
-Plugin URI: http://automattic.com/
+Plugin Name: Infinite Scroll from Jetpack.
+Plugin URI: https://github.com/sumhat/infinite-scroll
 Description: Adds infinite scrolling support to the front-end blog post view for themes, pulling the next set of posts automatically into view when the reader approaches the bottom of the page.
-Version: 1.1
-Author: Automattic
-Author URI: http://automattic.com/
+Version: 0.1
+Author: Shuhai Shen
+Author URI: https://leonax.net/
 License: GNU General Public License v2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 */
@@ -580,7 +580,7 @@ class The_Neverending_Home_Page {
 			'google_analytics' => false,
 			'offset'           => self::wp_query()->get( 'paged' ),
 			'history'          => array(
-				'host'                 => preg_replace( '#^http(s)?://#i', '', untrailingslashit( get_option( 'home' ) ) ),
+				'host'                 => preg_replace( '#^(http(s)?:)?//#i', '', untrailingslashit( get_option( 'home' ) ) ),
 				'path'                 => self::get_request_path(),
 				'use_trailing_slashes' => $wp_rewrite->use_trailing_slashes,
 				'parameters'           => self::get_request_parameters(),
@@ -1152,26 +1152,15 @@ class The_Neverending_Home_Page {
  * Initialize The_Neverending_Home_Page
  */
 function the_neverending_home_page_init() {
+	if (is_admin()) {
+		return;
+	}
 	if ( ! current_theme_supports( 'infinite-scroll' ) )
 		return;
 
 	new The_Neverending_Home_Page;
 }
 add_action( 'init', 'the_neverending_home_page_init', 20 );
-
-/**
- * Check whether the current theme is infinite-scroll aware.
- * If so, include the files which add theme support.
- */
-function the_neverending_home_page_theme_support() {
-	$theme_name = get_stylesheet();
-
-	$customization_file = apply_filters( 'infinite_scroll_customization_file', dirname( __FILE__ ) . "/themes/{$theme_name}.php", $theme_name );
-
-	if ( is_readable( $customization_file ) )
-		require_once( $customization_file );
-}
-add_action( 'after_setup_theme', 'the_neverending_home_page_theme_support', 5 );
 
 /**
  * Early accommodation of the Infinite Scroll AJAX request
