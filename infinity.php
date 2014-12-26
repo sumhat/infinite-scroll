@@ -12,10 +12,10 @@ License URI: http://www.gnu.org/licenses/gpl-2.0.html
 */
 
 /**
- * Class: The_Neverending_Home_Page relies on add_theme_support, expects specific
+ * Class: Infinite_Scroll_Leonax relies on add_theme_support, expects specific
  * styling from each theme; including fixed footer.
  */
-class The_Neverending_Home_Page {
+class Infinite_Scroll_Leonax {
 	/**
 	 * Register actions and filters, plus parse IS settings
 	 *
@@ -1149,23 +1149,23 @@ class The_Neverending_Home_Page {
 };
 
 /**
- * Initialize The_Neverending_Home_Page
+ * Initialize Infinite_Scroll_Leonax
  */
-function the_neverending_home_page_init() {
+function infinite_scroll_leonax_init() {
 	if (is_admin()) {
 		return;
 	}
 	if ( ! current_theme_supports( 'infinite-scroll' ) )
 		return;
 
-	new The_Neverending_Home_Page;
+	new Infinite_Scroll_Leonax;
 }
-add_action( 'init', 'the_neverending_home_page_init', 20 );
+add_action( 'init', 'infinite_scroll_leonax_init', 20 );
 
 /**
  * Early accommodation of the Infinite Scroll AJAX request
  */
-if ( The_Neverending_Home_Page::got_infinity() ) {
+if ( Infinite_Scroll_Leonax::got_infinity() ) {
 	/**
 	 * If we're sure this is an AJAX request (i.e. the HTTP_X_REQUESTED_WITH header says so),
 	 * indicate it as early as possible for actions like init
