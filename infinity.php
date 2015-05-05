@@ -4,7 +4,7 @@
 Plugin Name: Infinite Scroll from Jetpack.
 Plugin URI: https://github.com/sumhat/infinite-scroll
 Description: Adds infinite scrolling support to the front-end blog post view for themes, pulling the next set of posts automatically into view when the reader approaches the bottom of the page.
-Version: 0.2
+Version: 0.3
 Author: Shuhai Shen
 Author URI: https://leonax.net/
 License: GNU General Public License v2 or later
